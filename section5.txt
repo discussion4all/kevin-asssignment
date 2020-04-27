@@ -1,0 +1,146 @@
+a)Load data from file `input.json`, the file contents are given in ​(i) Example input data
+
+Answer:
+
+Assuming:
+    1. You has fs imported in the file 
+    2. input.json file lies in the same same folder as this code
+
+fs.readFile('./input.json', (err, data) => {
+  if (err) throw err;
+  console.log(data);
+});
+
+
+b)You must create and use a FruitBasket class and a Fruit class.
+    i)You may create any additional classes based on your approach
+
+Answer: 
+
+Assuming:
+    1. id, maxWeight, contents will be passed while creating an object with FruitBasket class
+    2. type, color, weight will be passed while creating an object with Fruit class
+
+class Fruit {
+  noOfFruits(contents) {
+    return contents.length;
+  }
+  noOfFruitsOfType(contents, givenType) {
+    const filteredFruits = contents.filter((e) => e.type === givenType);
+    return filteredFruits.length;
+  }
+  currentWeightOfBasket(contents) {
+    let weight = 0;
+    contents.map((e) => (weight += e.weight));
+    return weight;
+  }
+}
+
+class FruitBasket extends Fruit {
+  constructor() {
+    super();
+    this.id = "";
+    this.max_weight = "";
+    this.contents = [];
+    this.loadFruitData("input.json");
+  }
+  loadFruitData(jsonFile) {
+    fs.readFileSync("./" + jsonFile, "utf8", (err, data) => {
+      if (err) throw err;
+      const json = JSON.parse(data);
+      this.id = json.id;
+      this.max_weight = json.maxWeight;
+      this.contents = json.contents;
+    });
+  }
+  noOfFruits() {
+    return super.noOfFruits(this.contents);
+  }
+  noOfFruitsOfType(givenType) {
+    return super.noOfFruitsOfType(this.contents, givenType);
+  }
+  currentWeightOfBasket() {
+    return super.currentWeightOfBasket(this.contents);
+  }
+}
+
+const obj = new FruitBasket();
+
+
+c)Implement code that will answer the following questions:
+    i)How many fruits are in the basket
+    ii)How many fruits of a specific type are in the basket
+    iii)How heavy is the basket
+
+Answer:
+
+Assuming:
+    1. object has already been initiated using FruitBasket class 
+    2. object name is obj
+
+i) noOfFruits method in the FruitBasket gives the expected result example. Below is its implementation
+
+obj.noOfFruits()
+
+ii) noOfFruitsOfType in the FruitBasket gives the output of this query. 
+    Assuming "apple" is the fruit we are looking for, below is the implementation
+
+obj.noOfFruitsOfType("apple")
+
+iii) currentWeightOfBasket in the FruitBasket gives the output of this query.
+     Assuming you are querying for the current weight of the basket and not the max weight of the basket
+     Below is the implementation
+
+obj.currentWeightOfBasket()
+
+
+d)Output the data to file `output.json`, the file format should match ​
+(ii) Example outputdata for the given input data in (i)​, 
+this is simply a json file
+
+Answer:
+
+Assuming:
+    1. An object has been initiated with FruitBasket class
+    2. Name is obj
+    3. you know the type of fruit it has 
+    4. Here "apple" and "mango" are the fruits in basket
+    5. fs has already been required in the file
+    6. you want to generated json file in the same folder
+
+let objectToBeSaved = {
+    id: obj.id,
+    total_fruits: obj.noOfFruits(),
+    total_weight: obj.currentWeightOfBasket(),
+    fruit_amounts: [
+        {
+            type: "apple",
+            count: obj.noOfFruitsOfType("apple")
+        }, 
+        {
+            type: "pear",
+            count: obj.noOfFruitsOfType("pear")
+        }
+    ]
+}
+
+let json = JSON.stringify(objectToBeSaved)
+fs.writeFile("./output.json, json)
+
+
+e)Create a success scenario black box test
+
+Answer:
+
+Assuming:
+    1. mocha and chai are already installed in the project
+    2. object has been initiated with FruitBasket class
+    3. it has current weight of 5 and has 2 apple, each 2.5
+    4. expect imported from chai
+
+describle("testing currentWeightOfBasket method", () => {
+    it("should return true if weight found 5", () => {
+        expect(obj.currentWeightOfBasket()).to.equal(5)
+    })
+})
+

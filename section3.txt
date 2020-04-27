@@ -1,0 +1,21 @@
+5) What is an error first callback, and what is the reason for this pattern existing?
+
+Answer: 
+
+Error-first callbacks are used to pass error and data. The first argument to these functions is an error object and the subsequent arguments represent associated data. So, you can check the first argument i.e the error object to see if something went wrong and may be handle it. In case there is no error you can use the subsequent arguments and go ahead.
+
+6) Explain the difference between fs.readSync and fs.read (File System module in Nodejs)
+
+Answer: 
+
+readFile() is for reading file asynchronously and fs. readFileSync() is for reading files synchronously
+
+7) What tasks do you feel should be done asynchronously?
+
+Answer:
+
+Asynchronously process create separate thread from the main process and execute operation on it. Below are the scenario in which we can use asynchronously process.
+
+- There are a large number of tasks so there is likely always at least one task that can make progress.
+- The tasks perform lots of I/O, causing a synchronous program to waste lots of time blocking when other tasks could be running.
+- The tasks are largely independent of one another so there is little need for inter-task communication(and thus for one task to wait upon another).

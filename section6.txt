@@ -1,0 +1,32 @@
+f)Create a failure scenario black box test
+
+Answer:
+
+Assuming:
+    1. mocha and chai are already installed in the project
+    2. obj has been initiated with FruitBasket class
+    3. it has 2 apples
+    4. expect imported from chai
+
+describle("testing noOfFruitsOfType method", () => {
+    it("should return true if no of apples found are 3", () => {
+        expect(obj.noOfFruitsOfType("apple")).to.equal(3)
+    })
+})
+
+
+g)Write the unit test cases you feel are most relevant
+
+Answer:
+
+Assuming:
+    1. mocha and chai are already installed in the project
+    2. obj has been initiated with FruitBasket class and has max weight of 8
+    3. it has 2 apples, 3 mangos with total weight of 6
+    4. expect imported from chai
+
+describle("testing Basket weight", () => {
+    it("should return true if currentWeight of basket is less than max weight", () => {
+        expect(obj.currentWeightOfBasket()).to.be.at.most(obj.max_weight)
+    })
+})

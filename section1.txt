@@ -1,0 +1,49 @@
+1) Explain the difference between an abstract class and an interface.
+
+Answer:
+
+Interfaces only describe what properties and methods should be implemented, and don’t describe how methods should work.
+
+For example: 
+interface MyInterface {
+   method_1(): void;
+   method_2(): string;
+}
+
+
+Abstract classe is a restricted class that cannot be used to create objects. to access it, it must be inherited from another class.
+
+For example:
+abstract class Fruits {
+  
+  public void apple() {
+    -------
+  }
+}
+
+class Foods extends Fruits {
+	-------
+}
+ 
+
+2) What is the purpose of getters and setters in a class?
+
+Answer:
+
+The Getter and Setter are two conventional methods that are used for retrieving and updating value of a variable. We can not get/set private variable value outside the class so we need Getter and Setter method to do it. 
+
+For example:
+let user = {
+  // Getter method
+  get name() {
+    return this._name;
+  },
+  
+  // Setter method
+  set name(value) {
+    this._name = value;
+  }
+};
+
+user.name = "Pete";
+alert(user.name); // Pete
